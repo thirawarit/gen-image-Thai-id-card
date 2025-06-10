@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def generate_random_id(n=13):
     return ''.join([str(random.randint(0, 9)) for _ in range(n)])
 
-def create_thai_id_card(name_th, name_en, dob, religion, address, issue_date, exp_date, id_number=None):
+def create_thai_id_card(name_th, name_en, dob, religion, address, issue_date, exp_date, id_number=None, code_number=None):
     # สร้างพื้นหลังของบัตรประชาชน ขนาดเท่าของจริง (1011x636 พิกเซล สำหรับ 300 dpi)
     card_width, card_height = 1011, 636
     background_color = (173, 216, 230)  # สีฟ้าอ่อน
@@ -112,9 +112,9 @@ def create_thai_id_card(name_th, name_en, dob, religion, address, issue_date, ex
     # เพิ่มพื้นที่สำหรับภาพถ่ายบุคคล (ตำแหน่งขวาล่าง)
     photo_box = (760, 300, 980, 580)
     draw.rectangle(photo_box, fill=(255, 255, 255))
-    id_number = id_number or generate_random_id(n=14)
+    code_number = code_number or generate_random_id(n=14)
     draw.text((830, 440), "รูปถ่าย", font=font_thai, fill=(0, 0, 0))
-    draw.text((760, 585), f"{id_number[:4]}-{id_number[4:6]}-{id_number[6:14]}", font=font_thai, fill=(0, 0, 0))
+    draw.text((760, 585), f"{code_number[:4]}-{code_number[4:6]}-{code_number[6:14]}", font=font_thai, fill=(0, 0, 0))
 
     # บันทึกภาพบัตรประชาชน
     card.save("thai_id_card_real_size_with_positions.png")
